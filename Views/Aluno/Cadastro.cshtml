@@ -1,0 +1,150 @@
+﻿@using Faculdade.Models
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Aluno - Meu Aplicativo ASP.NET</title>
+    <link href="/Content/bootstrap.css" rel="stylesheet" />
+    <link href="/Content/site.css" rel="stylesheet" />
+
+    <script src="/Scripts/modernizr-2.8.3.js"></script>
+
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/">Faculdade</a>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="/">In&#237;cio</a></li>
+                    <li><a href="/Aluno/Cadastro">Cadastro Aluno</a></li>
+                    <li><a href="/Aluno">Lista de Alunos</a></li>
+                    <li><a href="/Cursos/Adicionar">Cadastro de Cursos</a></li>
+                    <li><a href="/Cursos">Lista de Cursos</a></li>
+                    <li><a href="/Professor">Lista de Professores</a></li>
+                    <li><a href="/Professor/Adicionar">Cadastro de Professor</a></li>
+                    <li><a href="/Cursos/Disciplina">Disciplinas</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+
+
+        <h2>Cadastro</h2>
+        <form action="/Aluno/Cadastro" method="post">
+            <div class="form-group">
+                <label class="control-label col-md-2" for="nome">Nome:</label>
+                <div class="col-md-10">
+                    <input class="form-control text-box single-line" data-val="true" data-val-length="Digite pelo menos 3 caracteres" data-val-length-max="50" data-val-length-min="3" data-val-required="Campo obrigatorio" id="nome" name="nome" type="text" value="" />
+                    <span class="field-validation-valid text-danger" data-valmsg-for="nome" data-valmsg-replace="true"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-2" for="email">Email:</label>
+                <div class="col-md-10">
+                    <input class="form-control text-box single-line" data-val="true" data-val-required="Campo obrigsatorio" id="email" name="email" type="email" value="" />
+                    <span class="field-validation-valid text-danger" data-valmsg-for="email" data-valmsg-replace="true"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-2" for="telefone">Telefone: </label>
+                <div class="col-md-10">
+                    <input class="form-control text-box single-line" data-val="true" data-val-required="Campo obrigatorio" id="telefone" name="telefone" type="tel" value="" />
+                    <span class="field-validation-valid text-danger" data-valmsg-for="telefone" data-valmsg-replace="true"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-2" for="endereco">Endere&#231;o: </label>
+                <div class="col-md-10">
+                    <textarea class="form-control text-box multi-line" data-val="true" data-val-required="Campo obrigatorio" id="endereco" name="endereco">
+</textarea>
+                    <span class="field-validation-valid text-danger" data-valmsg-for="endereco" data-valmsg-replace="true"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-2" for="complemento">Complemento: </label>
+                <div class="col-md-10">
+                    <textarea class="form-control text-box multi-line" id="complemento" name="complemento">
+</textarea>
+                    <span class="field-validation-valid text-danger" data-valmsg-for="complemento" data-valmsg-replace="true"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-2" for="cep">CEP: </label>
+                <div class="col-md-10">
+                    <input class="form-control text-box single-line" data-val="true" data-val-required="Campo obrigatorio" id="cep" name="cep" type="text" value="" />
+                    <span class="field-validation-valid text-danger" data-valmsg-for="cep" data-valmsg-replace="true"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-2" for="cidade">Cidade: </label>
+                <div class="col-md-10">
+                    <input class="form-control text-box single-line" data-val="true" data-val-required="Campo obrigatorio" id="cidade" name="cidade" type="text" value="" />
+                    <span class="field-validation-valid text-danger" data-valmsg-for="cidade" data-valmsg-replace="true"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-2" for="estado">Estado:</label>
+                <div class="col-md-10">
+                    <input class="form-control text-box single-line" data-val="true" data-val-required="Campo obrigatorio" id="estado" name="estado" type="text" value="" />
+                    <span class="field-validation-valid text-danger" data-valmsg-for="estado" data-valmsg-replace="true"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-2" for="codigoCurso">Curso:</label>
+                <div class="col-md-10">
+                    <div class="input-group mb-3">
+                        <select class="custom-select" id="inputGroupSelect02" name="codigoCurso">
+                            @foreach (Curso curso in ViewBag.Curso)
+                            {
+                                <option  value=@curso.codigo>@curso.nome</option>
+                            }
+
+                        </select>
+                        <div class="input-group-append">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-check">
+                <label>Sexo</label>
+                <input class="form-check-input" type="radio" name="sexo" id="flexRadioDefault1" value="F">
+                <label class="form-check-label" for="flexRadioDefault1">
+                    Feminino
+                </label>
+
+                <input class="form-check-input" type="radio" name="sexo" id="flexRadioDefault2" value="M">
+                <label class="form-check-label" for="flexRadioDefault2">
+                    Masculino
+                </label>
+            </div>
+            <input type="submit" value="Cadastrar" />
+        </form>
+
+
+        <hr />
+        <footer>
+            <p>&copy; 2021 - Meu Aplicativo ASP.NET</p>
+        </footer>
+    </div>
+
+    <script src="/Scripts/jquery-3.4.1.js"></script>
+
+    <script src="/Scripts/bootstrap.js"></script>
+
+    <script src="/Scripts/jquery.validate.js"></script>
+    <script src="/Scripts/jquery.validate.unobtrusive.js"></script>
+
+</body>
+</html>

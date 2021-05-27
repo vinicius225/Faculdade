@@ -1,0 +1,71 @@
+﻿using Faculdade.Banco;
+using Faculdade.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+
+namespace Faculdade.Controllers
+{
+    public class AlunoController : Controller
+    {
+        CrudAluno crudU = new CrudAluno();
+        CrudCurso CrudC = new CrudCurso();
+        // GET: Aluno
+        public ActionResult Index()
+        {
+
+            var resultado = crudU.Consultar();
+            return View(resultado);
+        }
+        public ActionResult Cadastro()
+        {
+            ViewBag.Curso = CrudC.Consultar();
+            return View();
+        }
+        [HttpPost]
+        public ActionResult Cadastro(Aluno aluno)
+        {
+            crudU.adicionar(aluno);
+            return Redirect("Index");
+
+        }
+
+        public ActionResult Editar(int? id)
+        {
+            ViewBag.Curso = CrudC.Consultar();
+
+            Aluno aluno = crudU.consultarID(id.Value);
+            return View(aluno);
+        }
+        [HttpPost]
+        public ActionResult Editar()
+        {
+            return View();
+
+        }
+        [HttpPost]
+        public ActionResult Editar (Aluno aluno)
+        {
+            crudU.atualizar(aluno);
+            return Redirect("Index");
+        }
+        public ActionResult Excluir(int? codigo)
+        {
+            if (codigo.HasValue)
+            {
+                crudU.excluir(codigo.Value);
+                return RedirectToAction("Alunos");
+            }
+            return RedirectToAction("Alunos");
+        }
+        public ActionResult Nota()
+        {
+            var resultado = crudU.nota();
+            return View(resultado);
+        }
+
+    }    
+   
+}

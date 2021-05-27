@@ -1,0 +1,49 @@
+﻿@using Faculdade.Models
+@{
+    ViewBag.Title = "Professor";
+}
+
+<h2>Lista de Professores</h2>
+
+@using (Html.BeginForm()) { 
+    <div class="row">
+        <div class="col-md-12">
+            @if (Model != null)
+            {
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Descrição</th>
+                          
+                            
+
+
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        @foreach (Professor item in Model)
+                        {
+
+                            <tr>
+
+                                <td>@item.nome</td>
+                              
+                                
+                                <td>
+                                    <a href="/Professor/Editar?codigo=@item.codigo">Editar</a> <label>|</label>
+                                    <a href="/Professor/Excluir?codigo=@item.codigo">Excluir</a><label>|</label>
+                                    <a href="/Professor/Turma?codigo=@item.codigo">Turmas</a><label>|</label>
+                                    <a href="/Professor/Disciplina/@item.codigo">Disciplinas</a>
+                                </td>
+                            </tr>
+                        }
+
+
+                    </tbody>
+                </table>
+            }
+        </div>
+    </div>
+}
+

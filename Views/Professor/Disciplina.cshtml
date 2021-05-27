@@ -1,0 +1,50 @@
+﻿@using Faculdade.Models
+@{
+    ViewBag.Title = "Disciplinas";
+}
+
+<h2>Lista de Disciplinas</h2>
+
+@using (Html.BeginForm())
+{
+    <div class="row">
+        <div class="col-md-12">
+            @if (Model != null)
+            {
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Curso</th>
+                            <th scope="col">Disciplina</th>
+                            <th scope="col">Horario</th>
+                            <th scope="col">Professor</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        @foreach (Disciplina item in Model)
+                        {
+
+                        <tr>
+
+                            <td>@item.nomeCurso</td>
+                            <td>@item.nomeDisciplina</td>
+                            <td>@item.horarioAula</td>
+                            <td>@item.nomeProfessor</td>
+                            <td>
+                                <a href="/Aluno/editar?codigo=@item.codigo">Editar</a><label>|</label>
+                                <a href="/Aluno/Excluir?codigo=@item.codigo">Excluir</a><label>|</label>
+                                <a href="/Aluno/Disciplinas?codigo=@item.codigo">Disciplinas</a><label>|</label>
+                            </td>
+                        </tr>
+                        }
+
+
+                    </tbody>
+                </table>
+            }
+        </div>
+    </div>
+}
+
