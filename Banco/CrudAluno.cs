@@ -29,6 +29,11 @@ namespace Faculdade.Banco
             conexao.Desconecta();
         }
 
+        public void atualizar(int id)
+        {
+            throw new NotImplementedException();
+        }
+
         public void atualizar(Aluno obj)
         {
             throw new NotImplementedException();
@@ -107,6 +112,32 @@ namespace Faculdade.Banco
                 n.nota =Ler.GetDouble(2);
                 n.semestre =int.Parse( Ler.GetString (3));
                 n.ano = int.Parse( Ler.GetString (4));
+                notas.Add(n);
+            }
+            return notas;
+        }
+        public List<Nota> notaId(int id)
+        {
+            MySqlCommand con = conexao.Conectar().CreateCommand();
+            con.CommandText = "select case when aluno.nome is null then  '--' else aluno.nome  end ," +
+        " case when disciplina.nome is null then  '--' else disciplina.nome end," +
+        " convert(case when nota.nota is null then  '--' else nota.nota end,decimal)," +
+        " case when nota.semestre is null then  '--' else nota.semestre end," +
+        " case when nota.ano is null then  '--' else nota.ano end,  aluno.codigo from nota" +
+        " left join aluno on aluno.codigo = nota.codigo_aluno" +
+        " left join disciplina on disciplina.codigo = nota.codigo_disciplina where aluno.codigo =@codigo";
+            con.Parameters.AddWithValue("@codigo", id);
+            var Ler = con.ExecuteReader();
+            List<Nota> notas = new List<Nota>();
+            while (Ler.Read())
+            {
+                Nota n = new Nota();
+                n.nomeAluno = Ler.GetString(0);
+                n.disciplina = Ler.GetString(1);
+                n.nota = Ler.GetDouble(2);
+                n.semestre = int.Parse(Ler.GetString(3));
+                n.ano = int.Parse(Ler.GetString(4));
+                n.codigoAluno = Ler.GetInt32(5);
                 notas.Add(n);
             }
             return notas;

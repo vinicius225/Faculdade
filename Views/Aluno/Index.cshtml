@@ -1,9 +1,9 @@
 ﻿@using Faculdade.Models
 @{
-    ViewBag.Title = "Alunos";
+    ViewBag.Title = "Notas";
 }
 
-<h2>Lista de Alunos</h2>
+<h2>Notas</h2>
 
 @using (Html.BeginForm()) { 
     <div class="row">
@@ -34,7 +34,8 @@
                                 
                                 <td>
                                     <a href="/Aluno/editar/@item.codigo">Editar</a> <label>|</label>
-                                    <a href="/Aluno/Excluir/codigo=@item.codigo">Excluir</a>
+                                    <a href="/Aluno/Excluir/@item.codigo">Excluir</a> <label>|</label>
+                                    <a href="/Aluno/NotaId/@item.codigo">Notas</a>
                                 </td>
                             </tr>
                         }

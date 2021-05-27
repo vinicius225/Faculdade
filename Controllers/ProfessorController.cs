@@ -38,8 +38,27 @@ namespace Faculdade.Controllers
         }
         public ActionResult Editar(int? id)
         {
-            var resultado = crudC.atualizar(id.Value);
+            if (id.HasValue) { 
+            var resultado = crudC.ConsultarProfessorId(id.Value);
             return View(resultado);
+            }
+            else
+            {
+                return RedirectToAction("Index");
+            }
+
+        }
+        [HttpPost]
+        public ActionResult Editar(Professor professor)
+        {
+            crudC.atualizarProfessor(professor);
+            return RedirectToAction("Index");
+
+        }
+        public ActionResult Excluir(int? id)
+        {
+            crudP.excluir(id.Value);
+            return RedirectToAction("Index");
 
         }
     }

@@ -25,6 +25,11 @@ namespace Faculdade.Banco
             throw new NotImplementedException();
         }
 
+        public void atualizar(int id)
+        {
+            throw new NotImplementedException();
+        }
+
         public List<Professor> Consultar()
         {
             MySqlCommand con = conexao.Conectar().CreateCommand();
@@ -36,7 +41,9 @@ namespace Faculdade.Banco
                professor.codigo = Ler.GetInt32(0);
                professor.nome = Ler.GetString(1);
                 resultado.Add(professor);
+                
             }
+            conexao.Desconecta();
             return (resultado);
         }
 
@@ -46,19 +53,26 @@ namespace Faculdade.Banco
             con.CommandText = "select * from professor where codigo =@codigo";
             con.Parameters.AddWithValue("@codigo", id);
             var Ler = con.ExecuteReader();
+            conexao.Desconecta();
             Professor professor = new Professor();
             if (Ler.Read())
             {
                 professor.codigo = Ler.GetInt32(0); 
                 professor.nome = Ler.GetString(1);
 
+
             }
             return (professor);
+            
         }
 
         public void excluir(int id)
         {
-            throw new NotImplementedException();
+            MySqlCommand con = conexao.Conectar().CreateCommand();
+            con.CommandText = "delete from professor where codigo = @codigo";
+            con.Parameters.AddWithValue("@codigo", id);
+            con.ExecuteNonQuery();
+            conexao.Desconecta();
         }
     }
 }

@@ -8,7 +8,7 @@ namespace Faculdade.Models
 {
     public class Nota
     {
-        public int codigo { get; set; }
+        public int codigoAluno { get; set; }
         [Display(Name ="Nome do aluno:")]
         [DataType(DataType.Text)]
         [Required(ErrorMessage ="Campo obrigatorio")]

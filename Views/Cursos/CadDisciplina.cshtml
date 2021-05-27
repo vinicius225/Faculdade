@@ -1,0 +1,42 @@
+﻿@using Faculdade.Models
+@model Disciplina
+@{
+    ViewBag.Title = "Adicionar";
+}
+
+<h2>Adicionar</h2>
+@using (Html.BeginForm())
+{
+
+    <div class="form-group">
+        @Html.LabelFor(model => Model.nomeDisciplina, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.nomeDisciplina, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.nomeDisciplina, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div>
+        <input hidden value="" name="codigoCurso" />
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => Model.horarioAula, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.horarioAula, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.horarioAula, "", new { @class = "text-danger" })
+        </div>
+    </div>
+        <div class="form-group">
+            <div class="col-md-10">
+                <label>Professor</label>
+                <select name="codigoProfessor">
+                    @foreach (Professor professor in ViewBag.Professor)
+                    {
+                        <option value=@professor.codigo>@professor.nome</option>
+                    }
+                </select>
+            </div>
+        </div>
+   
+        <input type="submit" value="Cadastrar" />
+        }
+

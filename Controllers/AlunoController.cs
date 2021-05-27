@@ -39,32 +39,37 @@ namespace Faculdade.Controllers
             Aluno aluno = crudU.consultarID(id.Value);
             return View(aluno);
         }
-        [HttpPost]
-        public ActionResult Editar()
-        {
-            return View();
-
-        }
+   
         [HttpPost]
         public ActionResult Editar (Aluno aluno)
         {
             crudU.atualizar(aluno);
             return Redirect("Index");
         }
-        public ActionResult Excluir(int? codigo)
-        {
-            if (codigo.HasValue)
-            {
-                crudU.excluir(codigo.Value);
-                return RedirectToAction("Alunos");
-            }
-            return RedirectToAction("Alunos");
-        }
+   
         public ActionResult Nota()
         {
             var resultado = crudU.nota();
             return View(resultado);
         }
+        public ActionResult NotaId(int? id)
+        {
+            var resultado = crudU.notaId(id.Value);
+            return View(resultado);
+        }
+        public ActionResult EditarNota(int? id)
+        {
+            List<Nota> resultado = crudU.notaId(id.Value);
+            return View(resultado);
+        }
+        public ActionResult Excluir(int? id)
+        {
+            if (id.HasValue) {
+                crudU.excluir(id.Value);
+                    }
+            return RedirectToAction("Index");
+        }
+      
 
     }    
    

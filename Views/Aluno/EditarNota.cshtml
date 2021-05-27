@@ -1,0 +1,48 @@
+﻿@model  IEnumerable<Faculdade.Models.Nota>
+@using Faculdade.Models
+
+@using (Html.BeginForm())
+{
+    <div class="row">
+        <div class="col-md-12">
+            @if (Model != null)
+            {
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Aluno</th>
+                            <th scope="col">Disciplina</th>
+                            <th scope="col">Nota</th>
+                            <th scope="col">Semestre</th>
+                            <th scope="col">Ano</th>
+
+
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        @foreach (Nota item in Model)
+                        {
+
+                            <tr>
+
+                                <td>@item.nomeAluno</td>
+                                <td>@item.disciplina</td>
+                                <td><input type="text" value="@item.nota" /></td>
+                                <td>@item.semestre</td>
+                                <td>@item.ano</td>
+                                <td>
+                                    <a href="/Aluno/EditarNota/@item.codigoAluno">Editar</a> <label>|</label>
+                                    <a href="/Aluno/Excluir?codigo=@item.codigoAluno">Excluir</a>
+                                </td>
+                            </tr>
+                        }
+
+
+                    </tbody>
+                </table>
+            }
+        </div>
+    </div>
+}
+

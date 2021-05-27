@@ -9,7 +9,7 @@ namespace Faculdade.Banco
     {
         void adicionar(T obj);
         void excluir(int id);
-        void atualizar(int id;
+        void atualizar(T obj);
         T consultarID(int id);
         List<T> Consultar();
     }
