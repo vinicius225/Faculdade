@@ -30,5 +30,6 @@ namespace Faculdade.Models
         [DataType(DataType.Text)]
         [Required(ErrorMessage = "Campo obrigatorio")]
         public int ano { get; set; }
+        public int codigoDisciplina { get; set; }
     }
 }

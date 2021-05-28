@@ -1,0 +1,103 @@
+﻿@using Faculdade.Models
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adicionar Nota - Meu Aplicativo ASP.NET</title>
+    <link href="/Content/bootstrap.css" rel="stylesheet" />
+    <link href="/Content/site.css" rel="stylesheet" />
+
+    <script src="/Scripts/modernizr-2.8.3.js"></script>
+
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/">Faculdade</a>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="/">In&#237;cio</a></li>
+                    <li><a href="/Aluno/Cadastro">Cadastro Aluno</a></li>
+                    <li><a href="/Aluno">Lista de Alunos</a></li>
+                    <li><a href="/Cursos/Adicionar">Cadastro de Cursos</a></li>
+                    <li><a href="/Cursos">Lista de Cursos</a></li>
+                    <li><a href="/Professor">Lista de Professores</a></li>
+                    <li><a href="/Professor/Adicionar">Cadastro de Professor</a></li>
+
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+
+
+
+        <h2>Adicionar Nota</h2>
+
+        <form action="/Aluno/AdicionarNota" method="post">
+            <div class="form-horizontal">
+                <hr />
+
+                <div class="form-group">
+                    <label class="control-label col-md-2" for="Nota">Nota</label>
+                    <div class="col-md-10">
+                        <input class="form-control text-box single-line" data-val="true" data-val-number="O campo nota deve ser um número." data-val-required="Campo obrigatorio" id="nota" name="semestre" type="text" value="" />
+                        <span class="field-validation-valid text-danger" data-valmsg-for="semestre" data-valmsg-replace="true"></span>
+                    </div>
+                    <div class="input-group-append">
+                    </div>
+                </div>
+
+                    <div class="input-group mb-3">
+                        <label>Disciplina</label>
+                        <select class="custom-select" id="inputGroupSelect02" name="codigoDisciplina">
+                            @foreach (Disciplina curso in ViewBag.Disciplina)
+                            {
+                                <option value=@curso.codigo>@curso.nomeDisciplina</option>
+                            }
+
+                        </select>
+                        <div class="form-group">
+                            <label class="control-label col-md-2" for="ano">Ano</label>
+                            <div class="col-md-10">
+                                <input class="form-control text-box single-line" data-val="true" data-val-number="O campo Ano deve ser um número." data-val-required="Campo obrigatorio" id="nota" name="ano" type="text" value="" />
+                                <span class="field-validation-valid text-danger" data-valmsg-for="nota" data-valmsg-replace="true"></span>
+                            </div>
+                            <div class="input-group-append">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-2" for="semestre">Semestre</label>
+                            <div class="col-md-10">
+                                <input class="form-control text-box single-line" data-val="true" data-val-number="O campo semestre deve ser um número." data-val-required="Campo obrigatorio" id="nota" name="semestre" type="text" value="" />
+                                <span class="field-validation-valid text-danger" data-valmsg-for="semestre" data-valmsg-replace="true"></span>
+                            </div>
+                            <div class="input-group-append">
+                            </div>
+                        </div>
+                    </div>
+            </div>
+        </form>
+
+        <hr />
+        <footer>
+            <p>&copy; 2021 - Meu Aplicativo ASP.NET</p>
+        </footer>
+    </div>
+
+    <script src="/Scripts/jquery-3.4.1.js"></script>
+
+    <script src="/Scripts/bootstrap.js"></script>
+
+
+</body>
+</html>

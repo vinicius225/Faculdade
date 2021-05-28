@@ -52,15 +52,16 @@ namespace Faculdade.Controllers
             var resultado = crudU.nota();
             return View(resultado);
         }
-        public ActionResult NotaId(int? id)
-        {
-            var resultado = crudU.notaId(id.Value);
-            return View(resultado);
-        }
         public ActionResult EditarNota(int? id)
         {
             List<Nota> resultado = crudU.notaId(id.Value);
             return View(resultado);
+        }
+        [HttpPost]
+        public ActionResult EditarNota (Aluno aluno)
+        {
+            crudU.atualizarNota(aluno);
+            return View();
         }
         public ActionResult Excluir(int? id)
         {
@@ -69,7 +70,8 @@ namespace Faculdade.Controllers
                     }
             return RedirectToAction("Index");
         }
-      
+
+
 
     }    
    

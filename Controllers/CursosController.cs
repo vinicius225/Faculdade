@@ -31,7 +31,7 @@ namespace Faculdade.Controllers
         }
         public ActionResult Disciplina(int? id)
         {
-            var resultado = crudC.Disciplina(id.Value);
+            var resultado = crudC.DisciplinaIdCurso(id.Value);
             return View(resultado);
         }
         public ActionResult Editar(int? id)
@@ -42,17 +42,9 @@ namespace Faculdade.Controllers
         [HttpPost]
         public ActionResult Editar(Curso curso)
         {
-            if(curso.codigo != null)
-            {
+
                 crudC.atualizar(curso);
                 return RedirectToAction("Index");
-            }
-            else
-            {
-                return View ();
-            }
-        
-         
         }
         public ActionResult Excluir(int? id)
         {

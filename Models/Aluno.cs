@@ -45,6 +45,8 @@ namespace Faculdade.Models
         [DataType(DataType.PhoneNumber)]
         [Required(ErrorMessage ="Campo obrigatorio")]
         public string telefone { get; set; }
-        
+        public double nota { get; set; }
+        public int codigoDisciplina { get; set; }
+
     }
 }

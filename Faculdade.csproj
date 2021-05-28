@@ -208,7 +208,7 @@
     <Content Include="Views\Professor\Editar.cshtml" />
     <Content Include="Views\Cursos\Editar.cshtml" />
     <Content Include="Views\Cursos\CadDisciplina.cshtml" />
-    <Content Include="Views\Aluno\NotaId.cshtml" />
+    <Content Include="Views\Aluno\AdicionarNota.cshtml" />
     <Content Include="Views\Aluno\EditarNota.cshtml" />
   </ItemGroup>
   <ItemGroup>

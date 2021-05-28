@@ -102,7 +102,7 @@ namespace Faculdade.Banco
             MySqlCommand con = conexao.Conectar().CreateCommand();
             con.CommandText = "delete from ";
         }
-        public List<Disciplina> Disciplina(int id)
+        public List<Disciplina> Disciplina()
         {
             MySqlCommand con = conexao.Conectar().CreateCommand();
             con.CommandText = "select case when curso.nome is null then  '--' else curso.nome  end ,"+
@@ -112,10 +112,8 @@ namespace Faculdade.Banco
 " from curso left join cursodisciplina on curso.codigo = cursodisciplina.codigo_curso"+
 " left join disciplinaprofessor on codigo_disciplinaprofessor = disciplinaprofessor.codigo"+
 " left join disciplina on disciplinaprofessor.codigo_disciplina = disciplina.codigo"+
-" left join professor on disciplinaprofessor.codigo_professor = professor.codigo where curso.codigo = @codigo";
-;
+" left join professor on disciplinaprofessor.codigo_professor = professor.codigo;";
             List<Disciplina> resultado = new List<Disciplina>();
-            con.Parameters.AddWithValue("@codigo", id);
             var Ler = con.ExecuteReader();
             while (Ler.Read())
             {
@@ -154,8 +152,9 @@ namespace Faculdade.Banco
                 disciplina.horarioAula = Ler.GetString(2);
                 disciplina.nomeProfessor = Ler.GetString(3);
                 resultado.Add(disciplina);
-                conexao.Desconecta();
+                
             }
+            conexao.Desconecta();
             return (resultado);
             
         }
@@ -214,13 +213,6 @@ namespace Faculdade.Banco
                 codigoDisciplina = Ler.GetInt32(0);
                 conexao.Desconecta();
             }
-            MySqlCommand con2 = conexao.Conectar().CreateCommand();
-            con2.CommandText = "insert into cursodisciplina values(null,@idCurso,@iddisciplina)";
-            con2.Parameters.AddWithValue("@idCurso", id);
-            con2.Parameters.AddWithValue("iddisciplina", codigoDisciplina);
-            con2.ExecuteNonQuery();
-            conexao.Desconecta();
-
             MySqlCommand con3 = conexao.Conectar().CreateCommand();
             con3.CommandText = "insert into disciplinaprofessor values (null,@codigodisciplina,@codigoprofessor, @horario)";
             con3.Parameters.AddWithValue("@codigodisciplina", codigoDisciplina);
@@ -228,6 +220,15 @@ namespace Faculdade.Banco
             con3.Parameters.AddWithValue("@horario", obj.horarioAula);
             con3.ExecuteNonQuery();
             conexao.Desconecta();
+
+            MySqlCommand con2 = conexao.Conectar().CreateCommand();
+            con2.CommandText = "insert into cursodisciplina values(null,@idCurso,@iddisciplina)";
+            con2.Parameters.AddWithValue("@idCurso", id);
+            con2.Parameters.AddWithValue("iddisciplina", codigoDisciplina);
+            con2.ExecuteNonQuery();
+            conexao.Desconecta();
+
+          
             }
 
         }

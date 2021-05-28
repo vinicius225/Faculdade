@@ -29,20 +29,41 @@ namespace Faculdade.Banco
             conexao.Desconecta();
         }
 
-        public void atualizar(int id)
-        {
-            throw new NotImplementedException();
-        }
 
         public void atualizar(Aluno obj)
         {
-            throw new NotImplementedException();
+            MySqlCommand con = conexao.Conectar().CreateCommand();
+            con.CommandText = "update aluno set nome = @nome, email = @email, telefone=@telefone, endereco=@endereco, sexo =@sexo," +
+                " complemento =@complemento, cep=@cep, cidade=@cidade, estado =@estado, codigo_curso=@codigo_curso  where codigo=@codigo";
+            con.Parameters.AddWithValue("@codigo_curso", obj.codigoCurso);
+            con.Parameters.AddWithValue("@nome", obj.nome);
+            con.Parameters.AddWithValue("@email", obj.email);
+            con.Parameters.AddWithValue("@sexo", obj.sexo);
+            con.Parameters.AddWithValue("@endereco", obj.endereco);
+            con.Parameters.AddWithValue("@complemento", obj.complemento);
+            con.Parameters.AddWithValue("@cep", obj.cep);
+            con.Parameters.AddWithValue("@cidade", obj.cidade);
+            con.Parameters.AddWithValue("@estado", obj.estado);
+            con.Parameters.AddWithValue("@telefone", obj.telefone);
+            con.Parameters.AddWithValue("@codigo", obj.codigo);
+            con.ExecuteNonQuery();
+            conexao.Desconecta();
+        }
+        public void atualizarNota(Aluno obj)
+        {
+            MySqlCommand con = conexao.Conectar().CreateCommand();
+            con.CommandText = "update nota set nota = @nota where codigo_aluno =@aluno and codigo_disciplina=@disciplina";
+            con.Parameters.AddWithValue("@aluno", obj.codigo);
+            con.Parameters.AddWithValue("@nota", obj.nota);
+            con.Parameters.AddWithValue("@disciplina", obj.codigoDisciplina);
+            con.ExecuteNonQuery();
+            conexao.Desconecta();
         }
 
         public List<Aluno> Consultar()
         {
             MySqlCommand con = conexao.Conectar().CreateCommand();
-            con.CommandText = "select   aluno.nome, email,curso.nome, aluno.codigo  from aluno  inner join curso on curso.codigo = aluno.codigo_curso";
+            con.CommandText = "select   aluno.nome, email,curso.nome, aluno.codigo  from aluno  inner join curso on curso.codigo = aluno.codigo_curso order by aluno.nome";
             var Leitor = con.ExecuteReader();
             List<Aluno> relatorio = new List<Aluno>();
             while (Leitor.Read())
@@ -123,9 +144,9 @@ namespace Faculdade.Banco
         " case when disciplina.nome is null then  '--' else disciplina.nome end," +
         " convert(case when nota.nota is null then  '--' else nota.nota end,decimal)," +
         " case when nota.semestre is null then  '--' else nota.semestre end," +
-        " case when nota.ano is null then  '--' else nota.ano end,  aluno.codigo from nota" +
+        " case when nota.ano is null then  '--' else nota.ano end,  aluno.codigo , nota.codigo_disciplina from nota" +
         " left join aluno on aluno.codigo = nota.codigo_aluno" +
-        " left join disciplina on disciplina.codigo = nota.codigo_disciplina where aluno.codigo =@codigo";
+        " left join disciplina on disciplina.codigo = nota.codigo_disciplina where aluno.codigo =@codigo ";
             con.Parameters.AddWithValue("@codigo", id);
             var Ler = con.ExecuteReader();
             List<Nota> notas = new List<Nota>();
@@ -138,6 +159,7 @@ namespace Faculdade.Banco
                 n.semestre = int.Parse(Ler.GetString(3));
                 n.ano = int.Parse(Ler.GetString(4));
                 n.codigoAluno = Ler.GetInt32(5);
+                n.codigoDisciplina = Ler.GetInt32(6);
                 notas.Add(n);
             }
             return notas;
